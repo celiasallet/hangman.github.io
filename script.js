@@ -8,12 +8,24 @@ function getRandomWord(words) {
 
 console.log(getRandomWord(words));
 
-alert("Ce nom d'animal contient " + (getRandomWord(words).length) + " lettres. Aide le fermier à le retrouver !");
+console.log("Ce nom d'animal contient " + (getRandomWord(words).length) + " lettres. Aide le Fermier à le retrouver !");
+
+getRandomWord(words);
+getRandomWord(words).length 
 
 
+const form = document.getElementById("myForm");
 
+    form.addEventListener("submit", function(recupererLettre) {
+        recupererLettre.preventDefault();
+        let lettre = document.getElementById("Lettre").value;
+        console.log("Lettre proposée :", lettre);
+        if lettre { 
+            i
+        }
 
-
+       //  document.getElementById("Lettre").value = "";
+    });
 
 
 

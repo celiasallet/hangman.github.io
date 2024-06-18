@@ -9,10 +9,10 @@
     <body>
         <div class="container">
             <header>
-                <h1>BeCode / JavaScript</h1>
+                <h1>La ferme des animaux </h1>
                 <h2>
-                    <span>3.1</span>
-                    <strong>couleur de fond (1)</strong>
+                    <span>Quel animal a ton volé au fermier ?!</span>
+    
                 </h2>
             </header>
             <div class="content">
@@ -20,12 +20,11 @@
                     <p>Chaque bouton, une fois cliqué, doit changer la couleur de fond de la page par celle indiquée.</p>
                 </section>
                 <section class="material">
-                    <div class="actions">
-                        <button type="button" id="red">Rouge</button>
-                        <button type="button" id="green">Vert</button>
-                        <button type="button" id="yellow">Jaune</button>
-                        <button type="button" id="blue">Bleu</button>
-                    </div>
+                    <form id="myForm"> <!-- Ajout de l'ID "myForm" pour cibler le formulaire -->
+                        <label for="Lettre">Aidez le fermier en proposant une lettre :</label>
+                        <input id="Lettre" name="Lettre" placeholder="Votre lettre" required>
+                        <input type="submit" value="Essayer">
+                    </form>
                 </section>
             </div>
         </div>
