@@ -5,23 +5,65 @@ function getRandomWord(words) {
     return words[index];
 }
 
-let motADeviner = getRandomWord(words);
-console.log("Le mot à deviner est : " + motADeviner);
-console.log("Ce nom d'animal contient " + motADeviner.length + " lettres. Aide le Fermier à le retrouver !");
+let motADeviner = getRandomWord(words).toLowerCase();
 
-let lettresRestantes = motADeviner.length;
-let lettresTrouvees = new Array(motADeviner.length).fill(false);
 
-// Afficher le nombre de lettres restantes au début du jeu
-document.getElementById('lettresRestantes').innerText = `Il reste ${lettresRestantes} lettre(s) à trouver.`;
+console.log("Le mot à deviner est : " + (motADeviner));
+console.log("Ce nom d'animal contient " + (motADeviner.length) + " lettres. Aide le Fermier à le retrouver !");
 
-// Ajout de l'écouteur d'événement pour le formulaire
-const form = document.getElementById("myForm");
-form.addEventListener("submit", function(event) {
-    event.preventDefault(); // Empêcher le formulaire de se soumettre et de rafraîchir la page
+let guessedLetters = [];
+let remainingAttempts = 6;
+let wordDisplay = new Array(motADeviner.length).fill('_');
 
-    let lettre = document.getElementById("Lettre").value.trim().toLowerCase(); // Récupérer la lettre proposée
-    document.getElementById("Lettre").value = ""; // Effacer le champ de saisie
+document.getElementById('word').textContent = wordDisplay.join(' ');
+document.getElementById('remainingAttempts').textContent = remainingAttempts;
 
-    console.log("Lettre proposée :", lettre);
+document.getElementById('guessForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêcher le formulaire de se soumettre
+
+    let guessInput = document.getElementById('guessInput');
+    let guessedLetter = guessInput.value.toLowerCase();
+    guessInput.value = ''; // Effacer le champ de saisie après chaque soumission
+
+    if (guessedLetters.includes(guessedLetter)) {
+        document.getElementById('message').textContent = 'Vous avez déjà proposé cette lettre.';
+    } else if (motADeviner.includes(guessedLetter)) {
+        document.getElementById('message').textContent = '';
+        updateWordDisplay(guessedLetter);
+    } else {
+        document.getElementById('message').textContent = `La lettre '${guessedLetter}' n'est pas dans le mot.`;
+        remainingAttempts--;
+    }
+
+    guessedLetters.push(guessedLetter);
+    document.getElementById('guessedLetters').textContent = guessedLetters.join(', ');
+    document.getElementById('remainingAttempts').textContent = remainingAttempts;
+
+    checkGameStatus();
 });
+
+function updateWordDisplay(letter) {
+    for (let i = 0; i < motADeviner.length; i++) {
+        if (motADeviner[i] === letter) {
+            wordDisplay[i] = letter;
+        }
+    }
+    document.getElementById('word').textContent = wordDisplay.join(' ');
+}
+
+function checkGameStatus() {
+    if (wordDisplay.join('') === motADeviner) {
+        document.getElementById('message').textContent = 'Félicitations ! Vous avez deviné le mot.';
+        endGame();
+    } else if (remainingAttempts === 0) {
+        document.getElementById('message').textContent = `Dommage ! Le mot était '${motADeviner}'.`;
+        endGame();
+    }
+}
+
+function endGame() {
+    document.getElementById('guessForm').removeEventListener('submit', function(event) {
+        event.preventDefault();
+    });
+    document.getElementById('guessInput').disabled = true;
+}

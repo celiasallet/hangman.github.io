@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8" />
-        <title>Hangman</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1>La ferme des animaux </h1>
-                <h2>
-                    <span>Quel animal a ton volé au fermier ?!</span>
-    
-                </h2>
-            </header>
-            <div class="content">
-                <section class="explain">
-                    <p>Chaque bouton, une fois cliqué, doit changer la couleur de fond de la page par celle indiquée.</p>
-                </section>
-                <section class="material">
-                    <form id="myForm"> <!-- Ajout de l'ID "myForm" pour cibler le formulaire -->
-                        <label for="Lettre">Aidez le fermier en proposant une lettre :</label>
-                        <input id="Lettre" name="Lettre" placeholder="Votre lettre" required>
-                        <input type="submit" value="Essayer">
-                    </form>
-                </section>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>La ferme des animaux</title>
+        </head>
+        <body>
+            <h1>La ferme des animaux en tous genres !</h1>
+            <h3>Aidez le fermier à retrouver son animal.</h>
+            <div id="game">
+                <p id="word"></p>
+                <p id="message"></p>
+                <p>Essayez une lettre :</p>
+                <form id="guessForm">
+                    <input type="text" id="guessInput" maxlength="1" required>
+                    <button type="submit">Proposer</button>
+                </form>
+                <p>Lettres déjà proposées : <span id="guessedLetters"></span></p>
+                <p>Essais restants : <span id="remainingAttempts"></span></p>
             </div>
-        </div>
-
-        <script src="script.js"></script>
-    </body>
-</html>
+            <script src="script.js"></script>
+        </body>
+        </html>
 
